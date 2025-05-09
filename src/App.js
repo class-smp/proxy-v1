@@ -12,9 +12,9 @@ const App = () => {
     const [activeTab, setActiveTab] = useState(0);
 
     const renderPage = (url) => {
-        if (url.startsWith("myproxy://welcome")) return <Welcome />;
-        if (url.startsWith("myproxy://settings")) return <Settings />;
-        return <ProxyFrame url={`https://yourproxy.koyeb.app/uv/service/${obfuscateURL(url)}`} />;
+        if (url.startsWith("glide://welcome")) return <Welcome />;
+        if (url.startsWith("glide://settings")) return <Settings />;
+        return <ProxyFrame url={`https://yawning-lorianne-csmp-7e4de4fa.koyeb.app/uv/service/${obfuscateURL(url)}`} />;
     };
 
     return (
