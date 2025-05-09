@@ -10,5 +10,8 @@
     "start": "vite",
     "build": "vite build",
     "dev": "vite"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
   }
 }
