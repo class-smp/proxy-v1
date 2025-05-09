@@ -1,49 +1,29 @@
 import React, { useState } from 'react';
-import { Search } from 'lucide-react';
 
-const Welcome = ({ tabs, setTabs, setActiveTab }) => {
-  const [query, setQuery] = useState("");
+const Welcome = ({ onSearch }) => {
+    const [input, setInput] = useState('');
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (!query.trim()) return;
-
-    const url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
-    const newTab = {
-      id: Date.now(),
-      title: query,
-      url,
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!input.trim()) return;
+        onSearch(input.startsWith('http') ? input : `https://www.google.com/search?q=${encodeURIComponent(input)}`);
     };
-    setTabs([...tabs, newTab]);
-    setActiveTab(tabs.length); // focus on the new tab
-  };
 
-  return (
-    <div className="flex flex-col h-full bg-zinc-900 text-white">
-      <div className="flex-grow flex flex-col items-center justify-center text-center px-4">
-        <h1 className="text-4xl font-light mb-6 tracking-tight">
-          Welcome to <span className="font-semibold text-blue-400">MyProxy</span>
-        </h1>
-
-        <form onSubmit={handleSearch} className="w-full max-w-xl relative">
-          <input
-            type="text"
-            placeholder="Search with Google or enter address"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="w-full px-5 py-3 rounded-full bg-zinc-800 border border-zinc-600 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <button type="submit" className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white">
-            <Search size={20} />
-          </button>
-        </form>
-
-        <p className="mt-4 text-zinc-500 text-sm">
-          Your private proxy browser. Ultra-fast. Ultra-private.
-        </p>
-      </div>
-    </div>
-  );
+    return (
+        <div className="flex flex-col items-center justify-center h-full bg-zinc-900 text-white">
+            <h1 className="text-4xl font-bold mb-4">Welcome to MyProxy</h1>
+            <p className="text-zinc-400 mb-6">Your ultra-fast, private proxy browser</p>
+            <form onSubmit={handleSubmit} className="w-full max-w-xl px-4">
+                <input
+                    type="text"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    placeholder="Search the web or enter URL"
+                    className="w-full p-3 rounded-full bg-zinc-800 text-white placeholder-zinc-400 border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+            </form>
+        </div>
+    );
 };
 
 export default Welcome;
