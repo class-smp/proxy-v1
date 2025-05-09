@@ -12,9 +12,10 @@ const App = () => {
     const [activeTab, setActiveTab] = useState(0);
 
     const renderPage = (url) => {
-        if (url.startsWith("glide://welcome")) return <Welcome />;
+        if (url.startsWith("glide://welcome"))
+            return <Welcome tabs={tabs} setTabs={setTabs} setActiveTab={setActiveTab} />;          
         if (url.startsWith("glide://settings")) return <Settings />;
-        return <ProxyFrame url={`https://yawning-lorianne-csmp-7e4de4fa.koyeb.app/uv/service/${obfuscateURL(url)}`} />;
+            return <ProxyFrame url={`https://yawning-lorianne-csmp-7e4de4fa.koyeb.app/uv/service/${obfuscateURL(url)}`} />;
     };
 
     return (
